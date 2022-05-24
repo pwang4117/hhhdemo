@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="analyzer" />
+		<Option makefile_is_custom="1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<MakeCommands>
+			<Build command="$make -f $makefile $target" />
+			<CompileFile command="$make -f $makefile $file" />
+			<Clean command="$make -f $makefile clean" />
+			<DistClean command="$make -f $makefile distclean$target" />
+			<AskRebuildNeeded command="$make -q -f $makefile $target" />
+			<SilentBuild command="$make -f $makefile $target &gt; $(CMD_NULL)" />
+		</MakeCommands>
+		<Build>
+			<Target title="analyzer">
+				<Option output="./analyzer" prefix_auto="1" extension_auto="1" />
+				<Option object_output="./" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="nanalyzer">
+				<Option output="./nanalyzer" prefix_auto="1" extension_auto="1" />
+				<Option object_output="./" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="converter">
+				<Option output="analyzer" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+			</Target>
+			<Target title="extractor">
+				<Option output="extractor" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+			</Target>
+			<Target title="hashpipe">
+				<Option output="hashpipe" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="analyzer.cpp">
+			<Option target="analyzer" />
+			<Option target="nanalyzer" />
+		</Unit>
+		<Unit filename="bloom-filter.h">
+			<Option target="analyzer" />
+			<Option target="nanalyzer" />
+		</Unit>
+		<Unit filename="converter.cpp">
+			<Option target="analyzer" />
+			<Option target="nanalyzer" />
+			<Option target="converter" />
+		</Unit>
+		<Unit filename="extractor.cpp">
+			<Option target="extractor" />
+		</Unit>
+		<Unit filename="hashpipe.cpp">
+			<Option target="hashpipe" />
+		</Unit>
+		<Unit filename="hashpipe.h">
+			<Option target="hashpipe" />
+		</Unit>
+		<Unit filename="model-hash.h">
+			<Option target="analyzer" />
+			<Option target="nanalyzer" />
+		</Unit>
+		<Unit filename="model-offline.h">
+			<Option target="analyzer" />
+			<Option target="nanalyzer" />
+		</Unit>
+		<Unit filename="model-online.h">
+			<Option target="analyzer" />
+			<Option target="nanalyzer" />
+		</Unit>
+		<Unit filename="model.h">
+			<Option target="analyzer" />
+			<Option target="nanalyzer" />
+		</Unit>
+		<Unit filename="trace.h">
+			<Option target="analyzer" />
+			<Option target="nanalyzer" />
+			<Option target="converter" />
+		</Unit>
+		<Unit filename="utils.h">
+			<Option target="analyzer" />
+			<Option target="nanalyzer" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

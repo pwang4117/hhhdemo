@@ -1,0 +1,68 @@
+
+CONSTANTS:
+-> t ... active_timeout
+-> T ... inactive_timeout
+
+REGISTERS:
+-> vld_timestamp_reg[]
+-> cnt_timestamp_reg[]
+-> cnt_value_reg[]
+
+METADATA:
+-> pp ... previous_pointer
+-> cp ... current_pointer
+-> np ... next_pointer
+
+
+prev_timestamp = vld_timestamp_reg[pp]
+curr_timestamp = vld_timestamp_reg[cp]
+next_timestamp = vld_timestamp_reg[np]
+
+curr_value = (curr_timestamp <= cnt_timestamp_reg[cp]) ? cnt_value_reg[cp] : 0;
+next_value = (curr_timestamp <= cnt_timestamp_reg[np]) ? cnt_value_reg[np] : 0;
+
+// Timeout
+if (curr_timestamp + t <= now) {
+
+    // Keep the rule
+    if (curr_value >= threshold && prefix_len != 0) {
+        generate_HHH_digest(); // HHH detected
+        curr_value = packet_size;
+        next_value = packet_size;
+
+        curr_timestamp = now
+
+    // Collapse the rule
+    } else {
+        curr_value = packet_size;
+        next_value = packet_size;
+
+        // prev_value = packet_size; // I should reset prev_value, underflow of the counter possible
+
+        curr_timestamp = 0;
+        prev_timestamp = now;
+    }
+
+// Heavy-Hitter detected, expand the rule
+} else if (next_value + packet_size > threshold && prefix_len != 32) {
+    generate_HH_digest(); // possible HHH detected
+    curr_value = curr_value - next_value;
+    next_value = 0;
+
+    next_timestamp = now;
+
+// Basic update
+} else {
+    curr_value = curr_value + packet_size;
+    next_value = next_value + packet_size;
+}
+
+cnt_value_reg[cp] = curr_value
+cnt_value_reg[np] = next_value
+
+cnt_timestamp_reg[cp] = now
+cnt_timestamp_reg[np] = now
+
+vld_timestamp_reg[pp] = prev_timestamp
+vld_timestamp_reg[cp] = curr_timestamp
+vld_timestamp_reg[np] = next_timestamp
