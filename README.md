@@ -31,18 +31,18 @@ Build the code once all the dependencies have been installed:
 Clone Monitoring SDN repository:
 
     cd ~
-    git clone https://bitbucket.org/GianniAntichi/monitoring_sdn.git monsdn
+    git clone https://github.com/kucejan/elastictrie.git monsdn
 
 Update the values of the shell variables *BMV2_PATH* and *P4C_PATH* in the *env.sh* file -- located in the *~/monsdn/code* directory of this repository. Note that if you cloned both repositories in the same directory as this one (Monitoring SDN), you will not need to change the value of the variables.
 
 To run an application:
 
-    cd ~/monsdn/code
+    cd ~/monsdn/
     make run
 
 On another terminal start digest client:
 
-    cd ~/monsdn/code
+    cd ~/monsdn/
     ./tools/controller/digest_client
 
 Now open the terminal h1 and start traffic generator:
