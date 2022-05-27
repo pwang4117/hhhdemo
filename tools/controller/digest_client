@@ -4,4 +4,4 @@ THIS_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source $THIS_DIR/../../env.sh
 
 THIS_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-exec python $THIS_DIR/digest_client.py "$@"
+exec python2 $THIS_DIR/digest_client.py "$@"

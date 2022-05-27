@@ -81,13 +81,12 @@ def main():
         h = HDRMsg(client, msg)
         d = h.data()
         print h
-
         for i in range(0, h.num_samples):
             m = HHHMsg(d)
             d = m.data()
             print "\t", m
 
-        h.confirm()
+        #h.confirm()
 
 if __name__ == "__main__":
     main()

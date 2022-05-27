@@ -2,13 +2,13 @@ THIS_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 # vvvvvvvvvv EDIT THIS vvvvvvvvvv
 
-BMV2_PATH=$THIS_DIR/../../bmv2
-# e.g. BMV2_PATH=$THIS_DIR/../bmv2
+BMV2_PATH=$THIS_DIR/../p4_env/behavioral-model
+# e.g. BMV2_PATH=$THIS_DIR/../p4_env/behavioral-model
 
-P4C_PATH=$THIS_DIR/../../p4c
+P4C_PATH=$THIS_DIR/../p4c
 # e.g P4C_BM_PATH=$THIS_DIR/../p4c
 
-P4C_BM_PATH=$THIS_DIR/../../p4c-bmv2
+P4C_BM_PATH=$THIS_DIR/../p4c-bmv2
 # e.g P4C_BM_PATH=$THIS_DIR/../p4c-bmv2
 
 # ^^^^^^^^^^ EDIT THIS ^^^^^^^^^^

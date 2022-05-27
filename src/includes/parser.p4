@@ -22,11 +22,31 @@ parser ParserImpl(packet_in packet, out headers hdr, inout metadata meta, inout 
     }
 }
 
-control verifyChecksum(in headers hdr, inout metadata meta) {
-    Checksum16() ipv4_checksum;
+control verifyChecksum(inout headers hdr,
+                       inout metadata meta)
+{
     apply {
-        if (hdr.ipv4.ihl == 4w5 && hdr.ipv4.hdrChecksum == ipv4_checksum.get({ hdr.ipv4.version, hdr.ipv4.ihl, hdr.ipv4.diffserv, hdr.ipv4.totalLen, hdr.ipv4.identification, hdr.ipv4.flags, hdr.ipv4.fragOffset, hdr.ipv4.ttl, hdr.ipv4.protocol, hdr.ipv4.srcAddr, hdr.ipv4.dstAddr })) 
-            mark_to_drop();
+        // There is code similar to this in Github repo p4lang/p4c in
+        // file testdata/p4_16_samples/flowlet_switching-bmv2.p4
+        // However in that file it is only for a fixed length IPv4
+        // header with no options.
+        verify_checksum(true,
+            { hdr.ipv4.version,
+                hdr.ipv4.ihl,
+                hdr.ipv4.diffserv,
+                hdr.ipv4.totalLen,
+                hdr.ipv4.identification,
+                hdr.ipv4.flags,
+                hdr.ipv4.fragOffset,
+                hdr.ipv4.ttl,
+                hdr.ipv4.protocol,
+                hdr.ipv4.srcAddr,
+                hdr.ipv4.dstAddr
+#ifdef ALLOW_IPV4_OPTIONS
+                , hdr.ipv4.options
+#endif /* ALLOW_IPV4_OPTIONS */
+            },
+            hdr.ipv4.hdrChecksum, HashAlgorithm.csum16);
     }
 }
 
