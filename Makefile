@@ -13,7 +13,7 @@ build16: $(OUTDIR)/hhh.json
 .PHONY: build16
 
 # Compilation of P4 v16 source code
-$(OUTDIR)/hhh.json: src/hhh.p4 $(wildcard src/includes/*.p4)
+$(OUTDIR)/dleft.json: src/dleft.p4 $(wildcard src/includes/*.p4)
 	${P4C} -o $@ --p4v 16 $<
 
 # Run aliases
@@ -31,7 +31,7 @@ clean:
 # Pack
 pack:
 	rm -f p4code.zip
-	zip -r --symlinks p4code.zip Makefile env.sh README.md src/* build/hhh.config doc/example.png tools/*.sh tools/*.py tools/mininet/* tools/controller/*
+	zip -r --symlinks p4code.zip Makefile env.sh README.md src/* build/dleft.config doc/example.png tools/*.sh tools/*.py tools/mininet/* tools/controller/*
 
 # Top-level make target
 else

@@ -148,7 +148,7 @@ struct hhh_digest_t {
 /*/
 |*| HHH processing control block
 /*/
-control process_hhh(inout headers hdr, inout metadata meta, inout standard_metadata_t standard_metadata) {
+control process_dleft(inout headers hdr, inout metadata meta, inout standard_metadata_t standard_metadata) {
 
     // HHH metadata instance
     hhh_metadata_t hhh;
@@ -437,7 +437,7 @@ control process_hhh(inout headers hdr, inout metadata meta, inout standard_metad
    
 
     // HHH priority encoder table
-    @name("pe_table") table pe_tab {
+    @name("pe_tab") table pe_tab {
         actions = { found_hash_lpm; }
         default_action = found_hash_lpm(0);
         key = { hhh.vector: ternary; }
@@ -525,12 +525,12 @@ control process_hhh(inout headers hdr, inout metadata meta, inout standard_metad
 |*| Ingress control block
 /*/
 control ingress(inout headers hdr, inout metadata meta, inout standard_metadata_t standard_metadata) {
-    @name("process_hhh") process_hhh() process_hhh_0;
+    @name("process_dleft") process_dleft() process_dleft_0;
 
     apply {
         // Process HHH if IP header valid
         if (hdr.ipv4.isValid()) {   // TODO: IPv6 support?!
-            process_hhh_0.apply(hdr, meta, standard_metadata);
+            process_dleft_0.apply(hdr, meta, standard_metadata);
         }
     }
 }

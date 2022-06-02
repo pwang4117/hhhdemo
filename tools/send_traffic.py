@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python2.7
 
 import sys
 import string
@@ -14,9 +14,10 @@ def send_traffic(packet_count=1, length=100, src_mac=None, src_ip=None, ifc='eth
     data = "X" * (length-24-10)
     packet = Ether(src=src_mac)/IP(src=src_ip)/Raw(data)
     sendp(packet, iface=ifc, count=packet_count, verbose=0)
+    print(packet_count)
 
 def main():
-    threading.Timer(1.0, main).start()
+    # threading.Timer(1.0, main).start()
     send_traffic(11, src_ip="10.0.0.0")
     send_traffic( 1, src_ip="10.0.0.1")
     send_traffic( 5, src_ip="10.0.0.2")
